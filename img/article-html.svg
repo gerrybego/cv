@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340">
+  <rect width="600" height="340" fill="#2e7d4f"/>
+  <g fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="230,100 150,170 230,240"/>
+    <polyline points="370,100 450,170 370,240"/>
+  </g>
+  <text x="300" y="315" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">HTML</text>
+</svg>

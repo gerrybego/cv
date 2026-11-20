@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340">
+  <rect width="600" height="340" fill="#1f4e79"/>
+  <rect x="70" y="90" width="460" height="160" rx="12" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="12 8"/>
+  <rect x="95" y="115" width="125" height="110" rx="8" fill="#D5FF57"/>
+  <rect x="237" y="115" width="125" height="110" rx="8" fill="#D5FF57"/>
+  <rect x="380" y="115" width="125" height="110" rx="8" fill="#D5FF57"/>
+  <text x="300" y="305" text-anchor="middle" font-family="Roboto, Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">CSS Flexbox</text>
+</svg>

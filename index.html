@@ -1,6 +1,5 @@
-<!-- Tu CV empieza aquí. Sigue los pasos de la izquierda. -->
-
 <!DOCTYPE html>
+<!-- Tu CV empieza aquí. Sigue los pasos de la izquierda. -->
 <html lang="es">
 
 <head>
@@ -12,14 +11,17 @@
 
   <title>Gerardo Bernabe</title>
 
+  <!-- Imagen local: la ruta /publico/img/muestras/ solo existía en la plataforma -->
   <link
     rel="icon"
     type="image/svg+xml"
-    href="/publico/img/muestras/profile.svg"
+    href="img/profile.svg"
   >
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
     rel="stylesheet"
   >
 
@@ -29,24 +31,32 @@
 
 <body>
 
+  <!-- Enlace de accesibilidad para usuarios de teclado -->
+  <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
   <!-- ENCABEZADO -->
-  <header>
+  <header class="site-header">
 
     <div class="top-bar">
       <p>Estudiante de Ingeniería en Sistemas</p>
     </div>
 
-    <h1 class="highlight">Gerardo Bernabe</h1>
+    <div class="header-inner">
+      <h1 class="highlight">Gerardo Bernabe</h1>
 
-    <img
-      src="https://un.edu.mx/wp-content/uploads/2022/05/Universidad-del-Norte-Que-es-un-curriculum-vitae-Subtitulo.png"
-      alt="Silueta de una persona, de frente"
-      width="200"
-      height="200"
-    >
+      <!-- data-fallback: imagen local que se usa si la externa no carga -->
+      <img
+        class="profile-photo"
+        src="https://un.edu.mx/wp-content/uploads/2022/05/Universidad-del-Norte-Que-es-un-curriculum-vitae-Subtitulo.png"
+        data-fallback="img/profile.svg"
+        alt="Ilustración de una persona junto a un currículum"
+        width="200"
+        height="200"
+      >
+    </div>
 
     <!-- NAVEGACIÓN -->
-    <nav>
+    <nav class="main-nav" aria-label="Secciones del currículum">
       <ul>
         <li><a href="#about">Perfil</a></li>
         <li><a href="#projects">Proyectos</a></li>
@@ -59,7 +69,7 @@
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main>
+  <main id="main-content">
 
     <!-- PERFIL -->
     <section class="row" id="about">
@@ -73,17 +83,19 @@
           Me gusta aprender cosas nuevas y trabajar en equipo.
         </p>
 
-        <a class="primary-btn" href="#projects">
-          Ver mis proyectos
-        </a>
+        <div class="about-actions">
+          <a class="primary-btn" href="#projects">
+            Ver mis proyectos
+          </a>
 
-        <button
-          type="button"
-          id="toggle-details"
-          aria-expanded="false"
-        >
-          Más sobre mí
-        </button>
+          <button
+            type="button"
+            id="toggle-details"
+            aria-expanded="false"
+          >
+            Más sobre mí
+          </button>
+        </div>
       </div>
 
       <div class="col-1-2">
@@ -105,9 +117,11 @@
       <article class="col-1-3">
         <img
           src="https://www.onaliat.mx/hubfs/Qu%C3%A9%20es%20la%20Ingenier%C3%ADa%20en%20Sistemas%20y%20en%20qu%C3%A9%20consiste%20su%20estudio-1.jpg"
+          data-fallback="img/project-programming.svg"
           alt="Proyecto de programación"
           width="150"
           height="150"
+          loading="lazy"
         >
 
         <h3>Programación</h3>
@@ -119,10 +133,12 @@
 
       <article class="col-1-3">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSugjd2bCR1bm_lLETPd6TBNKlAtXXycrvTOoauTs24g&s=10"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSugjd2bCR1bm_lLETPd6TBNKlAtXXycrvTOoauTs24g&amp;s=10"
+          data-fallback="img/project-networks.svg"
           alt="Proyecto de redes"
           width="150"
           height="150"
+          loading="lazy"
         >
 
         <h3>Redes</h3>
@@ -135,9 +151,11 @@
       <article class="col-1-3">
         <img
           src="https://virtual.cuc.edu.co/hubfs/Imported_Blog_Media/10-razones-para-estudiar-ingenieria-de-sistemas.webp"
+          data-fallback="img/project-school.svg"
           alt="Proyecto escolar"
           width="150"
           height="150"
+          loading="lazy"
         >
 
         <h3>Proyecto escolar</h3>
@@ -190,8 +208,10 @@
 
         <img
           id="gallery-image"
-          src="/publico/img/muestras/article-html.svg"
-          alt="Artículo sobre HTML"
+          src="img/article-html.svg"
+          alt="HTML: dos corchetes angulares sobre fondo verde"
+          width="600"
+          height="340"
         >
 
         <p
@@ -229,6 +249,10 @@
     <a href="mailto:gerardo@email.com">
       gerardo@email.com
     </a>
+
+    <p class="footer-note">
+      Correo de ejemplo, pendiente de sustituir por un contacto real.
+    </p>
 
     <p>Hecho a mano con HTML y CSS</p>
 

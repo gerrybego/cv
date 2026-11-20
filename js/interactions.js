@@ -1,4 +1,32 @@
 /* ==========================================
+   IMÁGENES DE RESPALDO
+   Si una imagen externa no carga, se sustituye
+   por la versión local indicada en data-fallback.
+========================================== */
+
+function useFallback(image) {
+  const fallback = image.dataset.fallback;
+
+  // Evita un ciclo infinito si el respaldo también fallara
+  if (fallback && image.getAttribute("src") !== fallback) {
+    image.src = fallback;
+  }
+}
+
+document.querySelectorAll("img[data-fallback]").forEach(function (image) {
+
+  image.addEventListener("error", function () {
+    useFallback(image);
+  });
+
+  // La imagen pudo fallar antes de que este script se ejecutara
+  if (image.complete && image.naturalWidth === 0) {
+    useFallback(image);
+  }
+
+});
+
+/* ==========================================
    ELEMENTOS DE LA GALERÍA
 ========================================== */
 
@@ -12,19 +40,21 @@ const nextButton = document.getElementById("next-image");
 
 /* ==========================================
    IMÁGENES DISPONIBLES
+   Rutas locales: /publico/img/muestras/ solo
+   existía en la plataforma educativa.
 ========================================== */
 
 const images = [
   {
-    src: "/publico/img/muestras/article-html.svg",
+    src: "img/article-html.svg",
     alt: "HTML: dos corchetes angulares sobre fondo verde"
   },
   {
-    src: "/publico/img/muestras/article-flexbox.svg",
+    src: "img/article-flexbox.svg",
     alt: "CSS con flexbox: tres cajas acomodadas en una fila"
   },
   {
-    src: "/publico/img/muestras/article-accessibility.svg",
+    src: "img/article-accessibility.svg",
     alt: "Accesibilidad: un botón con el contorno de foco marcado"
   }
 ];
@@ -37,6 +67,8 @@ let current = 0;
 
 /* ==========================================
    MOSTRAR IMAGEN
+   Navegación circular: después de la última
+   vuelve a la primera y viceversa.
 ========================================== */
 
 function showImage(index) {
@@ -56,24 +88,28 @@ function showImage(index) {
   galleryImage.alt = images[current].alt;
 
   imageCounter.textContent =
-    (current + 1) + " de " + images.length;
+    "Imagen " + (current + 1) + " de " + images.length;
 }
 
 /* ==========================================
-   BOTÓN ANTERIOR
+   BOTONES ANTERIOR Y SIGUIENTE
+   Solo se conectan si la galería existe,
+   para no provocar errores en la consola.
 ========================================== */
 
-prevButton.addEventListener("click", function () {
-  showImage(current - 1);
-});
+if (galleryImage && imageCounter && prevButton && nextButton) {
 
-/* ==========================================
-   BOTÓN SIGUIENTE
-========================================== */
+  prevButton.addEventListener("click", function () {
+    showImage(current - 1);
+  });
 
-nextButton.addEventListener("click", function () {
-  showImage(current + 1);
-});
+  nextButton.addEventListener("click", function () {
+    showImage(current + 1);
+  });
+
+  // Inicializar galería
+  showImage(0);
+}
 
 /* ==========================================
    ELEMENTOS DEL PERFIL
@@ -95,51 +131,49 @@ const facts = [
 
 /* ==========================================
    BOTÓN MÁS SOBRE MÍ
+   Muestra u oculta la lista sin duplicarla y
+   mantiene aria-expanded sincronizado.
 ========================================== */
 
-toggleButton.addEventListener("click", function () {
+if (aboutSection && toggleButton) {
 
-  const existingList = document.querySelector(
-    "#about .facts-list"
-  );
+  toggleButton.addEventListener("click", function () {
 
-  if (existingList) {
+    const existingList = aboutSection.querySelector(".facts-list");
 
-    existingList.remove();
+    if (existingList) {
 
-    toggleButton.setAttribute(
-      "aria-expanded",
-      "false"
-    );
+      existingList.remove();
 
-  } else {
+      toggleButton.setAttribute(
+        "aria-expanded",
+        "false"
+      );
 
-    const list = document.createElement("ul");
+    } else {
 
-    list.className = "facts-list";
+      const list = document.createElement("ul");
 
-    facts.forEach(function (fact) {
+      list.className = "facts-list";
 
-      const item = document.createElement("li");
+      facts.forEach(function (fact) {
 
-      item.textContent = fact;
+        const item = document.createElement("li");
 
-      list.appendChild(item);
+        item.textContent = fact;
 
-    });
+        list.appendChild(item);
 
-    aboutSection.appendChild(list);
+      });
 
-    toggleButton.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-  }
+      aboutSection.appendChild(list);
 
-});
+      toggleButton.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+    }
 
-/* ==========================================
-   INICIALIZAR GALERÍA
-========================================== */
+  });
 
-showImage(0);
+}

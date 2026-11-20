@@ -1,20 +1,100 @@
 /* ==========================================
+   VARIABLES (paleta original del CV)
+========================================== */
+
+:root {
+  --color-primary: #1f4e79;
+  --color-primary-dark: #163a5c;
+  --color-bg: #f5f5f5;
+  --color-text: #222222;
+  --color-accent: #D5FF57;
+  --color-white: #FFFFFF;
+  --color-surface-alt: #f7f9fb;
+  --color-border: #dde3ea;
+  --color-muted: #555f6b;
+
+  --radius: 12px;
+  --radius-pill: 999px;
+  --shadow: 0 2px 10px rgba(31, 78, 121, 0.08);
+  --gutter: 1.25rem;
+  --content-width: 1100px;
+}
+
+/* ==========================================
    ESTILOS GENERALES
 ========================================== */
 
+/* El padding se incluye en el ancho: evita desbordamientos
+   en .col-1-3 y .col-1-2 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #f5f5f5;
-  color: #222222;
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: "Roboto", sans-serif;
   line-height: 1.6;
 }
 
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
 .highlight {
-  color: #1f4e79;
+  color: var(--color-primary);
 }
 
 img {
   max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+/* ==========================================
+   ACCESIBILIDAD
+========================================== */
+
+/* Foco visible para navegación con teclado */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Sobre fondos oscuros, el foco usa el color de acento */
+.top-bar :focus-visible,
+#about :focus-visible,
+footer :focus-visible {
+  outline-color: var(--color-accent);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 0 0 8px 8px;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 /* ==========================================
@@ -22,9 +102,80 @@ img {
 ========================================== */
 
 .top-bar {
-  background-color: #1f4e79;
-  color: #FFFFFF;
-  padding: 10px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 10px 1rem;
+  text-align: center;
+}
+
+.top-bar p {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.site-header {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "photo name";
+  align-items: center;
+  gap: 1.5rem;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1rem 1.25rem;
+}
+
+.header-inner h1 {
+  grid-area: name;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+}
+
+.profile-photo {
+  grid-area: photo;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 4px solid var(--color-primary);
+  background: var(--color-white);
+}
+
+/* ==========================================
+   NAVEGACIÓN
+========================================== */
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0.5rem 1rem 1rem;
+  list-style: none;
+}
+
+.main-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.main-nav a:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
 }
 
 /* ==========================================
@@ -35,6 +186,29 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  max-width: var(--content-width);
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Cada sección es una tarjeta */
+main > section {
+  min-width: 0;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 1rem;
+}
+
+/* Sin margen inferior: la separación la da el row-gap de .row */
+main > section > h2 {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--color-accent);
+  color: var(--color-primary);
+  font-size: 1.6rem;
 }
 
 /* ==========================================
@@ -43,20 +217,61 @@ main {
 
 #about {
   grid-column: 1 / -1;
+  padding: 2rem;
+  border: none;
 
   background-image:
     linear-gradient(
       rgba(0, 0, 0, 0.65),
       rgba(0, 0, 0, 0.65)
     ),
-    url("/publico/img/muestras/banner.svg");
+    url("../img/banner.svg");
 
   background-size: cover;
-  color: #FFFFFF;
+  background-position: center;
+  color: var(--color-white);
+}
+
+#about > h2 {
+  color: var(--color-accent);
 }
 
 #about .highlight {
-  color: #D5FF57;
+  color: var(--color-accent);
+}
+
+#about .col-1-2 {
+  padding-inline: 0;
+}
+
+#about p {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Lista creada por JavaScript con el botón "Más sobre mí" */
+.facts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts-list li {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 8px;
 }
 
 /* ==========================================
@@ -67,41 +282,136 @@ main {
   grid-column: 1 / -1;
 }
 
+#projects .col-1-3 {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+#projects .col-1-3 img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+#projects h3 {
+  margin: 1rem 0 0.5rem;
+  color: var(--color-primary);
+}
+
+#projects .col-1-3 p {
+  margin: 0;
+}
+
 /* ==========================================
    FILAS Y COLUMNAS
 ========================================== */
 
+/* align-content evita que las filas se estiren cuando
+   la tarjeta es más alta que su contenido */
 .row {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
+  column-gap: var(--gutter);
+  row-gap: var(--gutter);
 }
 
 .row > h2 {
   width: 100%;
 }
 
+/* El ancho descuenta la separación entre columnas */
 .col-1-3 {
-  width: 33.333%;
+  width: calc((100% - 2 * var(--gutter)) / 3);
   padding: 15px;
 }
 
 .col-1-2 {
-  width: 50%;
+  width: calc((100% - var(--gutter)) / 2);
   padding: 15px;
+}
+
+/* ==========================================
+   LISTAS (EXPERIENCIA Y EDUCACIÓN)
+========================================== */
+
+#experience ul,
+#education ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#experience li,
+#education li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+#experience li:last-child,
+#education li:last-child {
+  border-bottom: none;
+}
+
+#experience li::before,
+#education li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 2px;
+  background: var(--color-primary);
 }
 
 /* ==========================================
    BOTONES
 ========================================== */
 
-.primary-btn {
-  background: #1f4e79;
-  color: #FFFFFF;
+.primary-btn,
+#toggle-details,
+.gallery-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.primary-btn {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-primary);
 }
 
 .primary-btn:hover {
-  background: #163a5c;
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+#toggle-details {
+  background: transparent;
+  color: var(--color-white);
+  border: 2px solid var(--color-accent);
+}
+
+#toggle-details:hover,
+#toggle-details[aria-expanded="true"] {
+  background: var(--color-accent);
+  color: var(--color-text);
 }
 
 /* ==========================================
@@ -112,29 +422,250 @@ main {
   position: fixed;
   right: 20px;
   bottom: 20px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
   min-height: 44px;
+  padding: 0 1.25rem;
+  background: var(--color-accent);
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-float:hover {
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+}
+
+.contact-float:focus-visible {
+  outline-color: var(--color-text);
 }
 
 /* ==========================================
-   GALERÍA DE HABILIDADES
+   HABILIDADES Y GALERÍA
 ========================================== */
+
+#skills {
+  grid-column: 1 / -1;
+  align-items: flex-start;
+}
+
+#skills ol {
+  flex: 1 1 220px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: skill;
+}
+
+#skills ol li {
+  counter-increment: skill;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+#skills ol li::before {
+  content: counter(skill);
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.9rem;
+}
 
 #skills-gallery {
   width: 100%;
+  flex: 2 1 340px;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+#gallery-image {
+  width: 100%;
+  aspect-ratio: 600 / 340;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+#image-counter {
+  margin: 0.75rem 0;
+  text-align: center;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.gallery-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
 .gallery-controls button {
-  min-height: 44px;
+  min-width: 120px;
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.gallery-controls button:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ==========================================
+   PIE DE PÁGINA
+========================================== */
+
+footer {
+  padding: 2rem 1rem 6rem;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  text-align: center;
+}
+
+footer a {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+footer p {
+  margin: 0.5rem 0 0;
+}
+
+.footer-note {
+  font-size: 0.875rem;
+  opacity: 0.85;
 }
 
 /* ==========================================
    DISEÑO RESPONSIVO
 ========================================== */
 
+/* Tabletas: proyectos en tarjetas horizontales */
+@media (max-width: 860px) {
+
+  .col-1-3 {
+    width: 100%;
+  }
+
+  #projects .col-1-3 {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 1rem;
+  }
+
+  #projects .col-1-3 img {
+    grid-row: 1 / span 2;
+    height: 100%;
+    aspect-ratio: auto;
+    min-height: 110px;
+  }
+
+  #projects h3 {
+    margin-top: 0;
+  }
+
+}
+
+/* Teléfonos */
 @media (max-width: 600px) {
 
   main {
     grid-template-columns: 1fr;
+    margin: 1.25rem auto;
+  }
+
+  main > section,
+  #about {
+    padding: 1.25rem;
+  }
+
+  .col-1-2 {
+    width: 100%;
+  }
+
+  .header-inner {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "name";
+    justify-items: center;
+    text-align: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .main-nav ul {
+    justify-content: center;
+  }
+
+  .about-actions > * {
+    flex: 1 1 100%;
+  }
+
+  .gallery-controls button {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-float {
+    right: 12px;
+    bottom: 12px;
+  }
+
+}
+
+/* Teléfonos pequeños: proyectos en tarjetas verticales */
+@media (max-width: 420px) {
+
+  #projects .col-1-3 {
+    display: block;
+  }
+
+  #projects .col-1-3 img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  #projects h3 {
+    margin-top: 1rem;
+  }
+
+}
+
+/* Respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
   }
 
 }
