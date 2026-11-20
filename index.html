@@ -1,0 +1,238 @@
+<!-- Tu CV empieza aquí. Sigue los pasos de la izquierda. -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="keywords" content="sistemas, programación, redes">
+  <meta name="description" content="Currículum de estudiante de Ingeniería en Sistemas">
+
+  <title>Gerardo Bernabe</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/publico/img/muestras/profile.svg"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/interactions.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ENCABEZADO -->
+  <header>
+
+    <div class="top-bar">
+      <p>Estudiante de Ingeniería en Sistemas</p>
+    </div>
+
+    <h1 class="highlight">Gerardo Bernabe</h1>
+
+    <img
+      src="https://un.edu.mx/wp-content/uploads/2022/05/Universidad-del-Norte-Que-es-un-curriculum-vitae-Subtitulo.png"
+      alt="Silueta de una persona, de frente"
+      width="200"
+      height="200"
+    >
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+      <ul>
+        <li><a href="#about">Perfil</a></li>
+        <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#experience">Experiencia</a></li>
+        <li><a href="#education">Educación</a></li>
+        <li><a href="#skills">Habilidades</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+
+    <!-- PERFIL -->
+    <section class="row" id="about">
+
+      <h2>Perfil</h2>
+
+      <div class="col-1-2">
+        <p>
+          Soy estudiante de Ingeniería en Sistemas,
+          interesado en la tecnología, programación y redes.
+          Me gusta aprender cosas nuevas y trabajar en equipo.
+        </p>
+
+        <a class="primary-btn" href="#projects">
+          Ver mis proyectos
+        </a>
+
+        <button
+          type="button"
+          id="toggle-details"
+          aria-expanded="false"
+        >
+          Más sobre mí
+        </button>
+      </div>
+
+      <div class="col-1-2">
+        <p>
+          Busco seguir aprendiendo sobre programación,
+          desarrollo de software y redes, además de
+          adquirir experiencia en proyectos relacionados
+          con Ingeniería en Sistemas.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- PROYECTOS -->
+    <section class="row" id="projects">
+
+      <h2>Proyectos</h2>
+
+      <article class="col-1-3">
+        <img
+          src="https://www.onaliat.mx/hubfs/Qu%C3%A9%20es%20la%20Ingenier%C3%ADa%20en%20Sistemas%20y%20en%20qu%C3%A9%20consiste%20su%20estudio-1.jpg"
+          alt="Proyecto de programación"
+          width="150"
+          height="150"
+        >
+
+        <h3>Programación</h3>
+
+        <p>
+          Realicé programas sencillos y aprendí a programar.
+        </p>
+      </article>
+
+      <article class="col-1-3">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSugjd2bCR1bm_lLETPd6TBNKlAtXXycrvTOoauTs24g&s=10"
+          alt="Proyecto de redes"
+          width="150"
+          height="150"
+        >
+
+        <h3>Redes</h3>
+
+        <p>
+          Realicé prácticas de redes y aprendí a configurarlas.
+        </p>
+      </article>
+
+      <article class="col-1-3">
+        <img
+          src="https://virtual.cuc.edu.co/hubfs/Imported_Blog_Media/10-razones-para-estudiar-ingenieria-de-sistemas.webp"
+          alt="Proyecto escolar"
+          width="150"
+          height="150"
+        >
+
+        <h3>Proyecto escolar</h3>
+
+        <p>
+          Realicé proyectos en equipo y aprendí a organizarme.
+        </p>
+      </article>
+
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section class="row" id="experience">
+
+      <h2>Experiencia</h2>
+
+      <ul>
+        <li>Proyectos escolares de programación</li>
+        <li>Configuración básica de redes</li>
+        <li>Desarrollo de programas sencillos</li>
+        <li>Trabajo en equipo en proyectos universitarios</li>
+      </ul>
+
+    </section>
+
+    <!-- EDUCACIÓN -->
+    <section class="row" id="education">
+
+      <h2>Educación</h2>
+
+      <ul>
+        <li>Unitec Atizapán</li>
+      </ul>
+
+    </section>
+
+    <!-- HABILIDADES -->
+    <section class="row" id="skills">
+
+      <h2>Habilidades</h2>
+
+      <ol>
+        <li>Responsabilidad</li>
+        <li>Comunicación</li>
+        <li>Organización</li>
+      </ol>
+
+      <!-- GALERÍA INTERACTIVA -->
+      <figure id="skills-gallery">
+
+        <img
+          id="gallery-image"
+          src="/publico/img/muestras/article-html.svg"
+          alt="Artículo sobre HTML"
+        >
+
+        <p
+          id="image-counter"
+          aria-live="polite"
+        ></p>
+
+        <div class="gallery-controls">
+          <button type="button" id="prev-image">
+            Anterior
+          </button>
+
+          <button type="button" id="next-image">
+            Siguiente
+          </button>
+        </div>
+
+      </figure>
+
+    </section>
+
+    <!-- CONTACTO FLOTANTE -->
+    <a
+      class="contact-float"
+      href="mailto:gerardo@email.com"
+    >
+      Escríbeme
+    </a>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+
+    <a href="mailto:gerardo@email.com">
+      gerardo@email.com
+    </a>
+
+    <p>Hecho a mano con HTML y CSS</p>
+
+  </footer>
+
+</body>
+</html>
